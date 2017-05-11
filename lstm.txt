@@ -1,0 +1,31 @@
+2 * 2 = 4
+
+X * Y = Z
+
+Z: Was wir haben wollen, messbar
+
+https://medium.com/@TalPerry/deep-learning-the-stock-market-df853d139e02
+http://colah.github.io/posts/2015-08-Understanding-LSTMs/
+
+NETWORK
+- Stacked LSTMs
+
+INPUT:
+- DataPeriod Array
+ - Price Delta (Candle Close - Candle Open)
+ - Volume Delta (Candle Close - Candle Open)
+
+OUTPUT:
+- DataPeriod Array(3) (The following 3 candles)
+ - Price Delta (Candle Close - Candle Open)
+  -> Probability (Buy/Sell)
+
+TRAINING:
+Trading Data X Days (Sollten möglichst viel Trading Data sein, desto mehr kann man trainieren)
+-> Split into 24 hrs parts (Sollte gering sein, da wir Day traden und nur die Probability für einen geringen Zeitraum brauchen)
+-> Split into 288 DataPeriods (24 hrs / 5 mins)
+-> INPUT DataPeriod using Activation Function
+-> Compare output with following 3 DataPeriod and do back propagation
+
+Trading Data sollte möglichst in einem einzigen Market Trend liegen.
+Es bringt nichts wenn Zeiträume trainiert werden, in denen das Volumen sehr gering ist und der Preis seitwärts verläuft.
