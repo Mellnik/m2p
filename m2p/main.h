@@ -5,6 +5,7 @@
 #include <fstream>
 #include <vector>
 #include <string>
+#include <limits>
 #include "json.hpp"
 
 using std::cout;

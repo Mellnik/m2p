@@ -16,7 +16,7 @@ public:
 		return m_Points.size();
 	}
 
-	vector<DataPoint *> &GetPoints()
+	const vector<DataPoint *> &GetPoints()
 	{
 		return m_Points;
 	}

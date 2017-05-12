@@ -6,6 +6,7 @@ Z: Was wir haben wollen, messbar
 
 https://medium.com/@TalPerry/deep-learning-the-stock-market-df853d139e02
 http://colah.github.io/posts/2015-08-Understanding-LSTMs/
+http://karpathy.github.io/2015/05/21/rnn-effectiveness/
 
 NETWORK
 - Stacked LSTMs

@@ -58,14 +58,14 @@ bool NeuralNetwork::LoadMarketTradingFromFile(string MarketTradingFile, int Data
 		}
 
 		DataPoint *Point = new DataPoint();
-		Point->m_Date = Data.at("date");
-		Point->m_High = Data.at("high");
-		Point->m_Low = Data.at("low");
-		Point->m_Open = Data.at("open");
-		Point->m_Close = Data.at("close");
-		Point->m_Volume = Data.at("volume");
-		Point->m_CoinVolume = Data.at("quoteVolume");
-		Point->m_WeightedAverage = Data.at("weightedAverage");
+		Point->m_Date = Data["date"];
+		Point->m_High = Data["high"];
+		Point->m_Low = Data["low"];
+		Point->m_Open = Data["open"];
+		Point->m_Close = Data["close"];
+		Point->m_Volume = Data["volume"];
+		Point->m_CoinVolume = Data["quoteVolume"];
+		Point->m_WeightedAverage = Data["weightedAverage"];
 
 		Period->AddDataPoint(Point);
 
@@ -90,7 +90,8 @@ void NeuralNetwork::Debug()
 		for (auto Point : Period->GetPoints())
 		{
 			cout << " Point " << ++PointCount << ":" << endl;
-			cout << "    Date " << Point->m_Date << ", Open " << Point->m_Open << ", Close " << Point->m_Close << endl;
+			cout.precision(std::numeric_limits<double>::max_digits10);
+			cout << "    Date " << Point->m_Date << ", Open " << std::fixed << Point->m_Open << ", Close " << std::fixed << Point->m_Close << endl;
 		}
 	}
 }

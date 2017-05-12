@@ -8,13 +8,13 @@ public:
 	~DataPoint();
 	
 	int m_Date;
-	float m_High;
-	float m_Low;
-	float m_Open;
-	float m_Close;
-	float m_Volume;
-	float m_CoinVolume;
-	float m_WeightedAverage;
+	double m_High;
+	double m_Low;
+	double m_Open;
+	double m_Close;
+	double m_Volume;
+	double m_CoinVolume;
+	double m_WeightedAverage;
 
 private:
 };
