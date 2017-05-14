@@ -1,8 +1,4 @@
-2 * 2 = 4
 
-X * Y = Z
-
-Z: Was wir haben wollen, messbar
 
 http://monik.in/a-noobs-guide-to-implementing-rnn-lstm-using-tensorflow/
 https://github.com/roatienza/Deep-Learning-Experiments/blob/master/Experiments/Tensorflow/RNN/rnn_words.py
@@ -43,3 +39,25 @@ Anfangs habe ich mit 2 Wochen Chart Daten gearbeitet. Das sind 4032 Data Points 
 Die Accuracy lag zwischen 41%-60%. Mir war unbewusst, dass 4032 Data Points zu viel waren um damit schnelle Ergebnisse zu erzielen.
 Ich habe es sodann mit 96 Data Points (8 Stunden) erneurt probiert. Nach etwa 10000 Iterations lag deie Accuracy schon bei 100%.
 Anfangs war es also eine 50/50 chance für das LSTM Netz richtig zu liegen, da es nur 2 outputs gibt.
+
+97 data points = 10k iterations 100%
+193 data points = 175k 41m immernoch 98%
+4032 data points = 450000 50/50 lol
+
+Test:
+Mit den 97 Data Points (8hrs) habe ich nach 15k iterations (5.76min) eine genauigkeit von 100% und eine Average Loss von 0.00000% (ist das normal??)
+nun habe ich den 98 und 99 Data Point, welcher nicht im trainingset vorhanden war, vorhergesagt -> Beide richtig!!!!
+Datenset:
+https://poloniex.com/public?command=returnChartData&currencyPair=BTC_ETH&start=1494525600&end=1494554400&period=300
+Datenset (8hrs) + die nächsten beiden DataPoints (10mins)
+https://poloniex.com/public?command=returnChartData&currencyPair=BTC_ETH&start=1494525600&end=1494555000&period=300
+1494554700 hat ein positives Preisdelta, 1494555000 ein negatives
+Output des Programms:
+'''
+timestamp: 84
+[0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0]
+, {1494554400 buy 0}, {1494554700 buy 0}, {1494555000 sell 1}
+'''
+
+Bei der ersten BTC_ETH_8hrs.json konnte ich eine genauigkeit von 100% erreichen. Bei der BTC_ETH_8hrs_now.json nur noch bis 99.3%.
+Das erklärt warum bei den 193 datapoints sogar nach 175k iters nur 98% möglich waren.

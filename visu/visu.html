@@ -1,5 +1,4 @@
-<!doctype html>
-
+<!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="utf-8">
@@ -8,40 +7,76 @@
 	<script src="jquery-3.2.1.min.js"></script>
 </head>
 <body>
-
-<canvas id="MarketChart"></canvas>
-<script>
-
-var tradingData = [{"date":1494525600,"high":0.047495,"low":0.0472402,"open":0.04743591,"close":0.04737994,"volume":49.84801072,"quoteVolume":1052.70093205,"weightedAverage":0.04735249},{"date":1494525900,"high":0.04745999,"low":0.04724039,"open":0.04737,"close":0.04738844,"volume":29.59155131,"quoteVolume":625.15143488,"weightedAverage":0.04733501},{"date":1494526200,"high":0.04749513,"low":0.04727607,"open":0.04738299,"close":0.04749,"volume":29.65954673,"quoteVolume":626.02589211,"weightedAverage":0.0473775},{"date":1494526500,"high":0.04749493,"low":0.04731002,"open":0.04731002,"close":0.04749493,"volume":23.19230426,"quoteVolume":488.92111698,"weightedAverage":0.04743567},{"date":1494526800,"high":0.04763199,"low":0.04745801,"open":0.04749494,"close":0.04762699,"volume":72.61889583,"quoteVolume":1528.10817254,"weightedAverage":0.04752209},{"date":1494527100,"high":0.0476425,"low":0.0474,"open":0.04750601,"close":0.04759986,"volume":36.98007871,"quoteVolume":778.29120733,"weightedAverage":0.04751445},{"date":1494527400,"high":0.047652,"low":0.04740011,"open":0.04749,"close":0.04758,"volume":6.32355858,"quoteVolume":133.09545887,"weightedAverage":0.04751145},{"date":1494527700,"high":0.04765189,"low":0.04728299,"open":0.04758,"close":0.04733205,"volume":84.71849092,"quoteVolume":1784.76379024,"weightedAverage":0.04746762},{"date":1494528000,"high":0.04759999,"low":0.04733386,"open":0.04733387,"close":0.04751001,"volume":28.45100055,"quoteVolume":599.00909115,"weightedAverage":0.04749677},{"date":1494528300,"high":0.04759999,"low":0.04735005,"open":0.047595,"close":0.0475699,"volume":24.47042087,"quoteVolume":514.99201783,"weightedAverage":0.04751611},{"date":1494528600,"high":0.04759992,"low":0.04735336,"open":0.0475699,"close":0.04745003,"volume":24.03457538,"quoteVolume":506.2823179,"weightedAverage":0.04747267},{"date":1494528900,"high":0.04759992,"low":0.04745019,"open":0.04753999,"close":0.04759992,"volume":21.12966344,"quoteVolume":444.2829019,"weightedAverage":0.04755902},{"date":1494529200,"high":0.0485015,"low":0.04745086,"open":0.04753999,"close":0.04800364,"volume":321.23690575,"quoteVolume":6693.59751873,"weightedAverage":0.04799166},{"date":1494529500,"high":0.04829996,"low":0.04768136,"open":0.04802714,"close":0.04799894,"volume":104.11373195,"quoteVolume":2169.12795494,"weightedAverage":0.04799796},{"date":1494529800,"high":0.0479989,"low":0.04750005,"open":0.04782756,"close":0.04766045,"volume":133.36969243,"quoteVolume":2791.60120071,"weightedAverage":0.04777533},{"date":1494530100,"high":0.0478,"low":0.04766047,"open":0.04779,"close":0.0478,"volume":72.60861482,"quoteVolume":1519.25691349,"weightedAverage":0.04779218},{"date":1494530400,"high":0.04799,"low":0.04766609,"open":0.0478,"close":0.04780005,"volume":47.75825483,"quoteVolume":998.87931998,"weightedAverage":0.04781183},{"date":1494530700,"high":0.04795485,"low":0.0475,"open":0.04780006,"close":0.04776499,"volume":126.77032791,"quoteVolume":2660.65261491,"weightedAverage":0.04764632},{"date":1494531000,"high":0.04775998,"low":0.0475,"open":0.04750013,"close":0.04759999,"volume":43.55891787,"quoteVolume":915.41688009,"weightedAverage":0.04758369},{"date":1494531300,"high":0.04768099,"low":0.0475,"open":0.0475,"close":0.04752002,"volume":50.54721833,"quoteVolume":1062.17884041,"weightedAverage":0.04758823},{"date":1494531600,"high":0.04763402,"low":0.04735098,"open":0.04752002,"close":0.04755599,"volume":78.95396335,"quoteVolume":1664.15271891,"weightedAverage":0.04744394},{"date":1494531900,"high":0.047626,"low":0.04739007,"open":0.04755092,"close":0.04740092,"volume":17.77085913,"quoteVolume":374.21381,"weightedAverage":0.04748851},{"date":1494532200,"high":0.04762599,"low":0.04739003,"open":0.04740093,"close":0.04755091,"volume":17.26216561,"quoteVolume":363.66261707,"weightedAverage":0.04746752},{"date":1494532500,"high":0.04761099,"low":0.0474,"open":0.047521,"close":0.0474,"volume":28.13557733,"quoteVolume":592.32213901,"weightedAverage":0.04750046},{"date":1494532800,"high":0.04750899,"low":0.047375,"open":0.04740001,"close":0.04739104,"volume":25.11278562,"quoteVolume":529.92853845,"weightedAverage":0.047389},{"date":1494533100,"high":0.0488,"low":0.04739105,"open":0.04740996,"close":0.0478335,"volume":729.55350309,"quoteVolume":15211.88554383,"weightedAverage":0.04795943},{"date":1494533400,"high":0.04800351,"low":0.04769956,"open":0.0478335,"close":0.0480031,"volume":25.38930856,"quoteVolume":530.68561178,"weightedAverage":0.04784246},{"date":1494533700,"high":0.0480019,"low":0.04772001,"open":0.04780059,"close":0.04783453,"volume":9.82038042,"quoteVolume":205.16832184,"weightedAverage":0.04786499},{"date":1494534000,"high":0.047948,"low":0.04781101,"open":0.04784301,"close":0.04784953,"volume":9.78449576,"quoteVolume":204.47679965,"weightedAverage":0.04785137},{"date":1494534300,"high":0.04799496,"low":0.04783506,"open":0.04784952,"close":0.04799,"volume":30.07269952,"quoteVolume":627.64474229,"weightedAverage":0.04791356},{"date":1494534600,"high":0.04912243,"low":0.04787801,"open":0.04799496,"close":0.0485249,"volume":260.15962075,"quoteVolume":5351.64332163,"weightedAverage":0.04861303},{"date":1494534900,"high":0.04858664,"low":0.048356,"open":0.04853001,"close":0.04852487,"volume":17.82004044,"quoteVolume":367.38269895,"weightedAverage":0.04850538},{"date":1494535200,"high":0.04855996,"low":0.04834565,"open":0.04852487,"close":0.04847,"volume":18.08718051,"quoteVolume":373.31405121,"weightedAverage":0.0484503},{"date":1494535500,"high":0.04852998,"low":0.04749518,"open":0.04847,"close":0.04807994,"volume":231.76686093,"quoteVolume":4838.88826769,"weightedAverage":0.04789671},{"date":1494535800,"high":0.04816899,"low":0.04782568,"open":0.04807991,"close":0.04811999,"volume":85.84948805,"quoteVolume":1783.77578522,"weightedAverage":0.04812795},{"date":1494536100,"high":0.048123,"low":0.04800788,"open":0.048123,"close":0.04812294,"volume":34.97758993,"quoteVolume":727.73788069,"weightedAverage":0.04806344},{"date":1494536400,"high":0.04813484,"low":0.048,"open":0.04812293,"close":0.048005,"volume":39.16633314,"quoteVolume":814.10920845,"weightedAverage":0.04810943},{"date":1494536700,"high":0.048153,"low":0.048005,"open":0.04800502,"close":0.04813497,"volume":29.60594549,"quoteVolume":615.29619508,"weightedAverage":0.04811657},{"date":1494537000,"high":0.0482,"low":0.04813497,"open":0.04813497,"close":0.04816894,"volume":38.2204503,"quoteVolume":793.41047882,"weightedAverage":0.04817235},{"date":1494537300,"high":0.048203,"low":0.048158,"open":0.04816893,"close":0.048158,"volume":16.26143069,"quoteVolume":337.47947433,"weightedAverage":0.04818494},{"date":1494537600,"high":0.0484242,"low":0.048105,"open":0.0481501,"close":0.0484242,"volume":31.97242486,"quoteVolume":662.36572686,"weightedAverage":0.04827004},{"date":1494537900,"high":0.04849999,"low":0.0484242,"open":0.0484242,"close":0.04842422,"volume":77.27935285,"quoteVolume":1594.02388876,"weightedAverage":0.04848067},{"date":1494538200,"high":0.04851737,"low":0.048415,"open":0.04842421,"close":0.04843892,"volume":30.82560933,"quoteVolume":635.90009672,"weightedAverage":0.04847555},{"date":1494538500,"high":0.0486,"low":0.048406,"open":0.04843893,"close":0.04847829,"volume":148.88055546,"quoteVolume":3064.99384912,"weightedAverage":0.0485745},{"date":1494538800,"high":0.048495,"low":0.04836192,"open":0.04845809,"close":0.048495,"volume":51.84487084,"quoteVolume":1070.88055704,"weightedAverage":0.0484133},{"date":1494539100,"high":0.04859273,"low":0.04840001,"open":0.04851194,"close":0.04845,"volume":32.28165048,"quoteVolume":665.86663889,"weightedAverage":0.04848065},{"date":1494539400,"high":0.04856616,"low":0.048151,"open":0.04846998,"close":0.04819685,"volume":80.21064203,"quoteVolume":1658.43049515,"weightedAverage":0.04836539},{"date":1494539700,"high":0.04834521,"low":0.04774047,"open":0.0483452,"close":0.04789985,"volume":66.24811076,"quoteVolume":1381.80811961,"weightedAverage":0.04794306},{"date":1494540000,"high":0.04791,"low":0.04765,"open":0.04789985,"close":0.04775399,"volume":39.42243451,"quoteVolume":825.10976851,"weightedAverage":0.04777841},{"date":1494540300,"high":0.04842575,"low":0.04765,"open":0.04775822,"close":0.047893,"volume":105.41989306,"quoteVolume":2194.82465643,"weightedAverage":0.04803112},{"date":1494540600,"high":0.04817331,"low":0.04789301,"open":0.04789301,"close":0.04803261,"volume":35.84165146,"quoteVolume":745.70888325,"weightedAverage":0.04806386},{"date":1494540900,"high":0.04858401,"low":0.047958,"open":0.04803261,"close":0.04800602,"volume":112.6485584,"quoteVolume":2335.28429173,"weightedAverage":0.04823762},{"date":1494541200,"high":0.04833996,"low":0.04800602,"open":0.04800602,"close":0.04810514,"volume":23.66994688,"quoteVolume":491.47358168,"weightedAverage":0.04816117},{"date":1494541500,"high":0.04833949,"low":0.04810101,"open":0.04810515,"close":0.04829998,"volume":32.90712814,"quoteVolume":681.96093404,"weightedAverage":0.04825368},{"date":1494541800,"high":0.04829996,"low":0.04811001,"open":0.0482,"close":0.04813001,"volume":30.5732399,"quoteVolume":633.68947371,"weightedAverage":0.0482464},{"date":1494542100,"high":0.048216,"low":0.04802503,"open":0.04813001,"close":0.04802504,"volume":19.79233226,"quoteVolume":411.37723862,"weightedAverage":0.04811236},{"date":1494542400,"high":0.04819099,"low":0.048078,"open":0.0481,"close":0.04807804,"volume":15.10016012,"quoteVolume":313.83753599,"weightedAverage":0.04811457},{"date":1494542700,"high":0.04826822,"low":0.04807805,"open":0.04807805,"close":0.048103,"volume":30.1288374,"quoteVolume":625.24781721,"weightedAverage":0.04818703},{"date":1494543000,"high":0.04825299,"low":0.04800357,"open":0.04825298,"close":0.04804002,"volume":42.06375533,"quoteVolume":875.5235082,"weightedAverage":0.04804411},{"date":1494543300,"high":0.04825,"low":0.048112,"open":0.048135,"close":0.04812,"volume":13.40369908,"quoteVolume":278.05721468,"weightedAverage":0.04820482},{"date":1494543600,"high":0.04823989,"low":0.0481,"open":0.04812,"close":0.04823,"volume":9.03866768,"quoteVolume":187.61737442,"weightedAverage":0.04817606},{"date":1494543900,"high":0.04823,"low":0.04802334,"open":0.04822999,"close":0.048028,"volume":9.10736157,"quoteVolume":189.31559963,"weightedAverage":0.04810676},{"date":1494544200,"high":0.04818998,"low":0.0480233,"open":0.04802336,"close":0.04804,"volume":2.58737499,"quoteVolume":53.81297336,"weightedAverage":0.04808087},{"date":1494544500,"high":0.04810705,"low":0.04800002,"open":0.04804,"close":0.04802324,"volume":27.78386628,"quoteVolume":578.47893907,"weightedAverage":0.04802917},{"date":1494544800,"high":0.04809,"low":0.04800001,"open":0.04802324,"close":0.04809,"volume":14.99064204,"quoteVolume":312.24531958,"weightedAverage":0.04800918},{"date":1494545100,"high":0.04809,"low":0.0478335,"open":0.04800002,"close":0.0478335,"volume":86.88791614,"quoteVolume":1810.51028773,"weightedAverage":0.04799084},{"date":1494545400,"high":0.047965,"low":0.04773,"open":0.04788996,"close":0.04787464,"volume":38.34046464,"quoteVolume":802.1079084,"weightedAverage":0.04779963},{"date":1494545700,"high":0.04794724,"low":0.04780002,"open":0.04780002,"close":0.047945,"volume":26.5165931,"quoteVolume":553.26264202,"weightedAverage":0.04792767},{"date":1494546000,"high":0.04795,"low":0.04787002,"open":0.047945,"close":0.04795,"volume":31.21001578,"quoteVolume":650.99352693,"weightedAverage":0.04794212},{"date":1494546300,"high":0.048,"low":0.047945,"open":0.047998,"close":0.048,"volume":53.56263235,"quoteVolume":1116.39042018,"weightedAverage":0.0479784},{"date":1494546600,"high":0.04808969,"low":0.04794802,"open":0.04799,"close":0.04808969,"volume":46.37976095,"quoteVolume":966.42112557,"weightedAverage":0.04799125},{"date":1494546900,"high":0.04808968,"low":0.04794805,"open":0.04802002,"close":0.04799003,"volume":49.32766306,"quoteVolume":1027.494936,"weightedAverage":0.04800769},{"date":1494547200,"high":0.048,"low":0.046875,"open":0.04799004,"close":0.04763663,"volume":586.38019586,"quoteVolume":12400.69549379,"weightedAverage":0.04728607},{"date":1494547500,"high":0.04776475,"low":0.04763662,"open":0.04765399,"close":0.0477,"volume":12.39295238,"quoteVolume":259.85390884,"weightedAverage":0.04769199},{"date":1494547800,"high":0.04776475,"low":0.04766408,"open":0.04769999,"close":0.0477,"volume":27.14332239,"quoteVolume":568.82733471,"weightedAverage":0.04771803},{"date":1494548100,"high":0.04790217,"low":0.04770001,"open":0.04770001,"close":0.04790213,"volume":21.35898073,"quoteVolume":446.61352114,"weightedAverage":0.0478243},{"date":1494548400,"high":0.04791135,"low":0.04781502,"open":0.04782401,"close":0.04781503,"volume":20.67574706,"quoteVolume":431.77914477,"weightedAverage":0.047885},{"date":1494548700,"high":0.04798394,"low":0.04781351,"open":0.04781503,"close":0.04798385,"volume":19.50086339,"quoteVolume":407.15165693,"weightedAverage":0.04789582},{"date":1494549000,"high":0.04798376,"low":0.04791135,"open":0.04791136,"close":0.04792601,"volume":7.85030588,"quoteVolume":163.83444571,"weightedAverage":0.04791608},{"date":1494549300,"high":0.0479838,"low":0.04791135,"open":0.04792601,"close":0.04797897,"volume":19.78727658,"quoteVolume":412.69122018,"weightedAverage":0.04794692},{"date":1494549600,"high":0.04845888,"low":0.04796677,"open":0.04798376,"close":0.04831039,"volume":177.77442997,"quoteVolume":3695.30365188,"weightedAverage":0.0481082},{"date":1494549900,"high":0.04845995,"low":0.047985,"open":0.04831035,"close":0.04810844,"volume":299.17459332,"quoteVolume":6227.21018924,"weightedAverage":0.04804311},{"date":1494550200,"high":0.04843997,"low":0.04805488,"open":0.04810845,"close":0.04820001,"volume":175.19440542,"quoteVolume":3629.15127996,"weightedAverage":0.0482742},{"date":1494550500,"high":0.0484,"low":0.04817422,"open":0.048205,"close":0.04827001,"volume":104.97873017,"quoteVolume":2172.34542944,"weightedAverage":0.04832506},{"date":1494550800,"high":0.0485418,"low":0.04827001,"open":0.04827001,"close":0.04840103,"volume":83.44789348,"quoteVolume":1724.69710945,"weightedAverage":0.04838408},{"date":1494551100,"high":0.04854161,"low":0.04825484,"open":0.04840105,"close":0.04840105,"volume":26.85686236,"quoteVolume":555.31342981,"weightedAverage":0.04836343},{"date":1494551400,"high":0.04840105,"low":0.04800471,"open":0.04840104,"close":0.04802001,"volume":21.86031264,"quoteVolume":453.87864672,"weightedAverage":0.04816334},{"date":1494551700,"high":0.04834201,"low":0.04803,"open":0.04803001,"close":0.04829995,"volume":27.91920299,"quoteVolume":579.11475739,"weightedAverage":0.04821013},{"date":1494552000,"high":0.04829995,"low":0.04801839,"open":0.04829994,"close":0.04817101,"volume":20.98781775,"quoteVolume":436.15456093,"weightedAverage":0.04812013},{"date":1494552300,"high":0.0487,"low":0.048171,"open":0.04817601,"close":0.048239,"volume":137.68586092,"quoteVolume":2843.76788006,"weightedAverage":0.0484167},{"date":1494552600,"high":0.04851198,"low":0.04817422,"open":0.04851198,"close":0.0483325,"volume":29.76762226,"quoteVolume":616.37690054,"weightedAverage":0.04829451},{"date":1494552900,"high":0.04847786,"low":0.04817422,"open":0.04842995,"close":0.04847786,"volume":19.57758469,"quoteVolume":405.57441469,"weightedAverage":0.04827125},{"date":1494553200,"high":0.04847295,"low":0.048163,"open":0.04818517,"close":0.04817423,"volume":49.07184716,"quoteVolume":1016.91728273,"weightedAverage":0.04825549},{"date":1494553500,"high":0.04834549,"low":0.04817422,"open":0.04817423,"close":0.04819025,"volume":26.1643302,"quoteVolume":542.51339903,"weightedAverage":0.04822798},{"date":1494553800,"high":0.04833998,"low":0.04817422,"open":0.04819024,"close":0.0482,"volume":25.21188374,"quoteVolume":522.64529644,"weightedAverage":0.04823899},{"date":1494554100,"high":0.048337,"low":0.04819996,"open":0.0482,"close":0.04821501,"volume":21.34287545,"quoteVolume":442.32669301,"weightedAverage":0.04825138},{"date":1494554400,"high":0.04839999,"low":0.04821002,"open":0.04821501,"close":0.0482302,"volume":22.72412971,"quoteVolume":470.49213853,"weightedAverage":0.04829863}];
-var chartData = [];
-console.log(tradingData.length);
-for (var i = 0; i < tradingData.length; i++)
-{		
-	var obj = tradingData[i];
-	// Delta
-	chartData.push({x: obj.date, y: obj.close - obj.open});
-	
-	// Absolute
-	//chartData.push({x: obj.date, y: obj.close});
+<style>
+div.ex2 {
+    /*height: 1000px;
+    width: 100%;*/
 }
+</style>
+<div class="ex2">
+<canvas id="MarketChart"></canvas>
+</div>
+<div class="ex2">
+<canvas id="MarketChart2"></canvas>
+</div>
+<script>
+$.getJSON("https://poloniex.com/public?command=returnChartData&currencyPair=BTC_ETH&start=1494762300&end=9999999999&period=300", function(json) { // 8hrs_now
+//$.getJSON("https://poloniex.com/public?command=returnChartData&currencyPair=BTC_ETH&start=1494525600&end=1494584400&period=300", function(json) { // 16hrs + 2 datapoints
+//$.getJSON("https://poloniex.com/public?command=returnChartData&currencyPair=BTC_ETH&start=1494525600&end=1494555000&period=300", function(json) { // 8hrs + 2 datapoints
+	var tradingData = json;
+	
+	var chartData = [];
+	var chartData2 = [];
+	console.log(tradingData.length);
+	for (var i = 0; i < tradingData.length; i++)
+	{		
+		var obj = tradingData[i];
+		// Delta
+		chartData.push({x: obj.date, y: obj.close - obj.open});
+		chartData2.push({x: obj.date, y: obj.close});
+		
+		// Absolute
+		//chartData.push({x: obj.date, y: obj.close});
+	}
 
-var ctx = document.getElementById("MarketChart");
-var scatterChart = new Chart(ctx, {
-    type: 'line',
-    data: {
-        datasets: [{
-            label: 'Price',
-            data: chartData
-        }]
-    },
-    options: {
-        scales: {
-            xAxes: [{
-                type: 'linear',
-                position: 'bottom'
-            }]
-        }
-    }
+
+	var ctx = document.getElementById("MarketChart");
+	var scatterChart = new Chart(ctx, {
+		type: 'line',
+		data: {
+			datasets: [{
+				label: 'Price Delta',
+				data: chartData
+			}]
+		},
+		options: {
+			scales: {
+				xAxes: [{
+					type: 'linear',
+					position: 'bottom'
+				}]
+			}
+		}
+	});
+	
+	var ctx2 = document.getElementById("MarketChart2");
+	var scatterChart = new Chart(ctx2, {
+		type: 'line',
+		data: {
+			datasets: [{
+				label: 'Closing Price',
+				data: chartData2
+			}]
+		},
+		options: {
+			scales: {
+				xAxes: [{
+					type: 'linear',
+					position: 'bottom'
+				}]
+			}
+		}
+	});
 });
 </script>
 </body>

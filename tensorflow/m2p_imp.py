@@ -23,8 +23,8 @@ logs_path = '.\\logs'
 writer = tf.summary.FileWriter(logs_path)
 
 # json file containg trading data
-#training_file = '..\\BTC_ETH_8hrs.json'
-training_file = '..\\BTC_ETH_8hrs_now.json'
+training_file = '..\\BTC_ETH_8hrs.json'
+#training_file = '..\\BTC_ETH_16hrs.json'
 
 with open(training_file) as data_file:
 	training_data = json.load(data_file)
@@ -43,7 +43,7 @@ vocab_size = len(dictionary) # total number of possible unique inputs (3)
 
 # Parameters
 learning_rate = 0.001 # how fast to learn
-training_iters = 30000 # how often to train
+training_iters = 25000 # how often to train
 display_step = 1000 # output status all 100 iterations
 n_input = 12 # LSTM takes 12 inputs = 12x buy/sell/hold
 '''
@@ -151,7 +151,7 @@ with tf.Session() as session:
 
     writer.add_graph(session.graph)
 
-    #saver.restore(session, ".\\models\\model_16hrs.ckpt")
+    #saver.restore(session, ".\\models\\model_8hrs.ckpt")
     #print("Model restored.")
 	
 	# ca 210 woerter sind in der datei, 3 werden pro loop trainiert, d.h. nach 70 loops hat er die datei
@@ -187,7 +187,7 @@ with tf.Session() as session:
             acc_final = (100 * acc_total / display_step)
             print("Iter= " + str(step + 1) + ", Average Loss= " + "{:.6f}".format(loss_total / display_step) + ", Average Accuracy= " + "{:.2f}%".format(100 * acc_total / display_step))
             if (100 * acc_total / display_step) >= 100:
-                exit_training = False
+                exit_training = True
             acc_total = 0
             loss_total = 0
         step += 1
@@ -200,7 +200,7 @@ with tf.Session() as session:
     print("\ttensorboard --logdir=%s" % (logs_path))
     print("Point your web browser to: http://localhost:6006/")
     while True:
-        prompt = "index: "
+        prompt = "timestamp: "
         datapoint_index = input(prompt)
         result_set = ""
         if len(datapoint_index) < 1:
@@ -208,13 +208,11 @@ with tf.Session() as session:
         try:
             symbols_in_keys = [dictionary[WhatToDo(training_data[i]['close'] - training_data[i]['open'])] for i in range(int(datapoint_index), int(datapoint_index) + n_input) ]
             print(symbols_in_keys)
-            date_count = 0
-            for i in range(5):
+            for i in range(3):
                 keys = np.reshape(np.array(symbols_in_keys), [-1, n_input, 1])
                 onehot_pred = session.run(pred, feed_dict={x: keys})
                 onehot_pred_index = int(tf.argmax(onehot_pred, 1).eval())
-                result_set = "%s, {%s %s %i}" % (result_set, training_data[int(datapoint_index) + n_input]['date'] + date_count, reverse_dictionary[onehot_pred_index], onehot_pred_index)
-                date_count += 300
+                result_set = "%s, {%s %s %i}" % (result_set, training_data[int(datapoint_index) + n_input]['date'], reverse_dictionary[onehot_pred_index], onehot_pred_index)
                 symbols_in_keys = symbols_in_keys[1:]
                 symbols_in_keys.append(onehot_pred_index)
             print(result_set)
