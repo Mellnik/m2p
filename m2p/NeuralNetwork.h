@@ -13,7 +13,7 @@ public:
 
 	bool LoadMarketTradingFromFile(string MarketTradingFile, int DataPointTime, int DataPointsPerPeriod);
 
-	void Debug();
+	void Debug(int verbosity = 0);
 
 private:
 	vector<DataPeriod *> m_Periods;

@@ -4,6 +4,9 @@ X * Y = Z
 
 Z: Was wir haben wollen, messbar
 
+http://monik.in/a-noobs-guide-to-implementing-rnn-lstm-using-tensorflow/
+https://github.com/roatienza/Deep-Learning-Experiments/blob/master/Experiments/Tensorflow/RNN/rnn_words.py
+https://medium.com/towards-data-science/lstm-by-example-using-tensorflow-feb0c1968537
 https://medium.com/@TalPerry/deep-learning-the-stock-market-df853d139e02
 http://colah.github.io/posts/2015-08-Understanding-LSTMs/
 http://karpathy.github.io/2015/05/21/rnn-effectiveness/
@@ -30,3 +33,13 @@ Trading Data X Days (Sollten möglichst viel Trading Data sein, desto mehr kann 
 
 Trading Data sollte möglichst in einem einzigen Market Trend liegen.
 Es bringt nichts wenn Zeiträume trainiert werden, in denen das Volumen sehr gering ist und der Preis seitwärts verläuft.
+
+
+Ni = (Pi / P0) - 1
+Pi = P0(Ni + 1)
+
+Notizen:
+Anfangs habe ich mit 2 Wochen Chart Daten gearbeitet. Das sind 4032 Data Points (je 300 Sekunden).
+Die Accuracy lag zwischen 41%-60%. Mir war unbewusst, dass 4032 Data Points zu viel waren um damit schnelle Ergebnisse zu erzielen.
+Ich habe es sodann mit 96 Data Points (8 Stunden) erneurt probiert. Nach etwa 10000 Iterations lag deie Accuracy schon bei 100%.
+Anfangs war es also eine 50/50 chance für das LSTM Netz richtig zu liegen, da es nur 2 outputs gibt.

@@ -36,14 +36,14 @@ bool NeuralNetwork::LoadMarketTradingFromFile(string MarketTradingFile, int Data
 		return false;
 	}
 
-	if (j.size() % DataPointsPerPeriod != 0)
+	if ((j.size() % DataPointsPerPeriod) != 0)
 	{
 		Utility::Log("Shit lol");
 		return false;
 	}
 
-	cout << "Read " << j.size() << " Trading Data Points" << endl;
-
+	cout << "Read " << j.size() << " trading data points." << endl;
+	
 	size_t NumberOfPeriods = j.size() / DataPointsPerPeriod;
 	SetNumberOfPeriods(NumberOfPeriods);
 	
@@ -80,18 +80,17 @@ bool NeuralNetwork::LoadMarketTradingFromFile(string MarketTradingFile, int Data
 	return true;
 }
 
-void NeuralNetwork::Debug()
+void NeuralNetwork::Debug(int verbosity)
 {
 	int PeriodCount = 0;
 	for (auto Period : m_Periods)
 	{
-		cout << "Period " << ++PeriodCount << " contains " << Period->GetSize() << " Points" << endl;
-		int PointCount = 0;
-		for (auto Point : Period->GetPoints())
+		cout << "Period " << ++PeriodCount << " contains " << Period->GetSize() << " data points." << endl;
+		if (verbosity < 1)
 		{
-			cout << " Point " << ++PointCount << ":" << endl;
-			cout.precision(std::numeric_limits<double>::max_digits10);
-			cout << "    Date " << Point->m_Date << ", Open " << std::fixed << Point->m_Open << ", Close " << std::fixed << Point->m_Close << endl;
+			continue;
 		}
+
+		Period->Debug();
 	}
 }

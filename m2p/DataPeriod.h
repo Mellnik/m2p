@@ -11,15 +11,13 @@ public:
 
 	void AddDataPoint(DataPoint *point);
 	bool IsFull();
+
 	size_t GetSize() const
 	{
 		return m_Points.size();
 	}
 
-	const vector<DataPoint *> &GetPoints()
-	{
-		return m_Points;
-	}
+	void Debug();
 
 private:
 	size_t m_Size;
