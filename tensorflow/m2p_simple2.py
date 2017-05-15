@@ -23,8 +23,8 @@ logs_path = '.\\logs'
 writer = tf.summary.FileWriter(logs_path)
 
 # json file containg trading data
-#training_file = '..\\BTC_ETH_8hrs.json'
-training_file = '..\\BTC_ETH_8hrs_now.json'
+training_file = '..\\BTC_ETH_8hrs.json'
+#training_file = '..\\BTC_ETH_8hrs_now.json'
 
 with open(training_file) as data_file:
 	training_data = json.load(data_file)
@@ -151,8 +151,8 @@ with tf.Session() as session:
 
     writer.add_graph(session.graph)
 
-    #saver.restore(session, ".\\models\\model_16hrs.ckpt")
-    #print("Model restored.")
+    saver.restore(session, ".\\models\\model.ckpt")
+    print("Model restored.")
 	
 	# ca 210 woerter sind in der datei, 3 werden pro loop trainiert, d.h. nach 70 loops hat er die datei
 	# offset = offset + n_input + 1    <-- pro loop
@@ -187,7 +187,7 @@ with tf.Session() as session:
             acc_final = (100 * acc_total / display_step)
             print("Iter= " + str(step + 1) + ", Average Loss= " + "{:.6f}".format(loss_total / display_step) + ", Average Accuracy= " + "{:.2f}%".format(100 * acc_total / display_step))
             if (100 * acc_total / display_step) >= 100:
-                exit_training = False
+                exit_training = True
             acc_total = 0
             loss_total = 0
         step += 1

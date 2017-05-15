@@ -20,7 +20,7 @@ div.ex2 {
 <canvas id="MarketChart2"></canvas>
 </div>
 <script>
-$.getJSON("https://poloniex.com/public?command=returnChartData&currencyPair=BTC_ETH&start=1494762300&end=9999999999&period=300", function(json) { // 8hrs_now
+$.getJSON("https://poloniex.com/public?command=returnChartData&currencyPair=BTC_ETH&start=1494598800&end=1494874800&period=1800", function(json) { // 8hrs_now
 //$.getJSON("https://poloniex.com/public?command=returnChartData&currencyPair=BTC_ETH&start=1494525600&end=1494584400&period=300", function(json) { // 16hrs + 2 datapoints
 //$.getJSON("https://poloniex.com/public?command=returnChartData&currencyPair=BTC_ETH&start=1494525600&end=1494555000&period=300", function(json) { // 8hrs + 2 datapoints
 	var tradingData = json;

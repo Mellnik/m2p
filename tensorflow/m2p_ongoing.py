@@ -8,8 +8,19 @@ import urllib.request
 import time
 import json
 import math
+import sys
 
 print("Market To Probability (M2P)")
+
+if len(sys.argv) != 3:
+    print("Usage:", sys.argv[0], "<date_start> <num_data_points>")
+    sys.exit(1)
+
+date_start = int(sys.argv[1])
+num_data_points = int(sys.argv[2])
+date_end = date_start + ((num_data_points - 1) * 300)
+	
+print("Starting date: ", date_start, " End date: ", date_end)
 
 def elapsed(sec):
     if sec < 60:
@@ -26,7 +37,7 @@ logs_path = '.\\logs'
 writer = tf.summary.FileWriter(logs_path)
 
 # json file containg trading data
-training_file = "https://poloniex.com/public?command=returnChartData&currencyPair=BTC_ETH&start=1494576000&end=1494604500&period=300"
+training_file = "https://poloniex.com/public?command=returnChartData&currencyPair=BTC_ETH&start=" + str(date_start) + "&end=" + str(date_end) + "&period=300"
 with urllib.request.urlopen(training_file) as url:
     training_data = json.loads(url.read().decode())
     training_data_total = len(training_data)
@@ -50,7 +61,7 @@ def WhatToDo(deltaP):
 
 # Parameters
 learning_rate = 0.001 # how fast to learn
-training_iters = 25000 # how often to train
+training_iters = 20000 # how often to train
 display_step = 1000 # output status all 100 iterations
 n_input = 12 # LSTM takes 12 inputs = 12x buy/sell/hold
 
@@ -155,30 +166,27 @@ with tf.Session() as session:
         offset += (n_input + 1)
     print("Optimization finished! Reached " + "{:.2f}%".format(acc_final))
     print("Elapsed time: ", elapsed(time.time() - start_time))
-    save_path = saver.save(session, ".\\models\\model_96dp_v1.ckpt")
+    save_path = saver.save(session, ".\\models_ongoing\\model_" + str(date_start) + "_" + str(date_end) + ".ckpt")
     print("Model saved in file: %s" % save_path)
-    print("Run on command line.")
-    print("\ttensorboard --logdir=%s" % (logs_path))
-    print("Point your web browser to: http://localhost:6006/")
-    while True:
-        prompt = "index: "
-        datapoint_index = input(prompt)
-        result_set = ""
-        if len(datapoint_index) < 1:
-            continue
-        try:
-            symbols_in_keys = [dictionary[WhatToDo(training_data[i]['close'] - training_data[i]['open'])] for i in range(int(datapoint_index), int(datapoint_index) + n_input) ]
-            print(symbols_in_keys)
-            date_count = 0
-            for i in range(5):
-                keys = np.reshape(np.array(symbols_in_keys), [-1, n_input, 1])
-                onehot_pred = session.run(pred, feed_dict={x: keys})
-                onehot_pred_index = int(tf.argmax(onehot_pred, 1).eval())
-                result_set = "%s, {%s %s %i}" % (result_set, training_data[int(datapoint_index) + n_input]['date'] + date_count, reverse_dictionary[onehot_pred_index], onehot_pred_index)
-                date_count += 300
-                symbols_in_keys = symbols_in_keys[1:]
-                symbols_in_keys.append(onehot_pred_index)
-            print(result_set)
-        except:
-            print("Error")
-
+    datapoint_index = training_data_total - n_input - 1
+    result_set = ""
+    date_count = 0
+    future_file = "https://poloniex.com/public?command=returnChartData&currencyPair=BTC_ETH&start=" + str(training_data[int(datapoint_index) + n_input]['date']) + "&end=" + str(training_data[int(datapoint_index) + n_input]['date'] + 5 * 300) + "&period=300"
+    print(future_file)
+    with urllib.request.urlopen(future_file) as url:
+        future_data = json.loads(url.read().decode())
+    #print(future_data)
+    symbols_in_keys = [dictionary[WhatToDo(training_data[i]['close'] - training_data[i]['open'])] for i in range(int(datapoint_index), int(datapoint_index) + n_input) ]
+    for i in range(5):
+        keys = np.reshape(np.array(symbols_in_keys), [-1, n_input, 1])
+        onehot_pred = session.run(pred, feed_dict={x: keys})
+        onehot_pred_index = int(tf.argmax(onehot_pred, 1).eval())
+        if (future_data[i]['close'] - future_data[i]['open']) > 0:
+            real_pred = 0
+        else:
+            real_pred = 1
+        result_set = "%s, {%s onehot_pred %s %i, real_pred %i}" % (result_set, training_data[int(datapoint_index) + n_input]['date'] + date_count, reverse_dictionary[onehot_pred_index], onehot_pred_index, real_pred)
+        date_count += 300
+        symbols_in_keys = symbols_in_keys[1:]
+        symbols_in_keys.append(onehot_pred_index)
+    print(result_set)
